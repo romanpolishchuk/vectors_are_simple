@@ -2,23 +2,23 @@ use std::ops;
 
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Vector2<T> {
-    x: T,
-    y: T,
+    pub x: T,
+    pub y: T,
 }
 
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Vector3<T> {
-    x: T,
-    y: T,
-    z: T,
+    pub x: T,
+    pub y: T,
+    pub z: T,
 }
 
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Vector4<T> {
-    x: T,
-    y: T,
-    z: T,
-    w: T,
+    pub x: T,
+    pub y: T,
+    pub z: T,
+    pub w: T,
 }
 
 /// Add
