@@ -1,19 +1,19 @@
 use std::ops;
 
-#[derive(Debug)]
+#[derive(Debug, Copy, Clone)]
 struct Vector2<T> {
     x: T,
     y: T,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Copy, Clone)]
 struct Vector3<T> {
     x: T,
     y: T,
     z: T,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Copy, Clone)]
 struct Vector4<T> {
     x: T,
     y: T,
@@ -107,6 +107,96 @@ where
             y: self.y + rhs,
             z: self.z + rhs,
             w: self.w + rhs,
+        }
+    }
+}
+
+/// Sub
+/// Vector - Vector
+
+impl<T> ops::Sub for Vector2<T>
+where
+    T: ops::Sub<Output = T>,
+{
+    type Output = Self;
+    fn sub(self, rhs: Self) -> Self::Output {
+        Self {
+            x: self.x - rhs.x,
+            y: self.y - rhs.y,
+        }
+    }
+}
+
+impl<T> ops::Sub for Vector3<T>
+where
+    T: ops::Sub<Output = T>,
+{
+    type Output = Self;
+    fn sub(self, rhs: Self) -> Self::Output {
+        Self {
+            x: self.x - rhs.x,
+            y: self.y - rhs.y,
+            z: self.z - rhs.z,
+        }
+    }
+}
+
+impl<T> ops::Sub for Vector4<T>
+where
+    T: ops::Sub<Output = T>,
+{
+    type Output = Self;
+    fn sub(self, rhs: Self) -> Self::Output {
+        Self {
+            x: self.x - rhs.x,
+            y: self.y - rhs.y,
+            z: self.z - rhs.z,
+            w: self.w - rhs.w,
+        }
+    }
+}
+
+/// Sub
+/// Vector - number
+
+impl<T> ops::Sub<T> for Vector2<T>
+where
+    T: Copy + ops::Sub<Output = T>,
+{
+    type Output = Self;
+    fn sub(self, rhs: T) -> Self::Output {
+        Self {
+            x: self.x - rhs,
+            y: self.y - rhs,
+        }
+    }
+}
+
+impl<T> ops::Sub<T> for Vector3<T>
+where
+    T: Copy + ops::Sub<Output = T>,
+{
+    type Output = Self;
+    fn sub(self, rhs: T) -> Self::Output {
+        Self {
+            x: self.x - rhs,
+            y: self.y - rhs,
+            z: self.z - rhs,
+        }
+    }
+}
+
+impl<T> ops::Sub<T> for Vector4<T>
+where
+    T: Copy + ops::Sub<Output = T>,
+{
+    type Output = Self;
+    fn sub(self, rhs: T) -> Self::Output {
+        Self {
+            x: self.x - rhs,
+            y: self.y - rhs,
+            z: self.z - rhs,
+            w: self.w - rhs,
         }
     }
 }
