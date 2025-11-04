@@ -345,7 +345,7 @@ where
     }
 }
 
-/// Mul (Scalar Multiplication)
+/// Mul (Component Wise Multiplication)
 /// Vector * Vector
 
 impl<T> ops::Mul for Vector2<T>
@@ -435,7 +435,7 @@ where
     }
 }
 
-/// MulAssign (Scalar Multiplication)
+/// MulAssign (Component Wise Multiplication)
 /// Vector * Vector
 
 impl<T> ops::MulAssign for Vector2<T>
@@ -507,7 +507,7 @@ where
     }
 }
 
-/// Div (Scalar Division)
+/// Div (Component Wise Division)
 /// Vector / Vector
 
 impl<T> ops::Div for Vector2<T>
@@ -597,7 +597,7 @@ where
     }
 }
 
-/// DivAssign (Scalar Division)
+/// DivAssign (Component Wise Division)
 /// Vector * Vector
 
 impl<T> ops::DivAssign for Vector2<T>
