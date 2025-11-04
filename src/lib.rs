@@ -1,20 +1,20 @@
 use std::ops;
 
-#[derive(Debug, Copy, Clone)]
-struct Vector2<T> {
+#[derive(Debug, Copy, Clone, PartialEq)]
+pub struct Vector2<T> {
     x: T,
     y: T,
 }
 
-#[derive(Debug, Copy, Clone)]
-struct Vector3<T> {
+#[derive(Debug, Copy, Clone, PartialEq)]
+pub struct Vector3<T> {
     x: T,
     y: T,
     z: T,
 }
 
-#[derive(Debug, Copy, Clone)]
-struct Vector4<T> {
+#[derive(Debug, Copy, Clone, PartialEq)]
+pub struct Vector4<T> {
     x: T,
     y: T,
     z: T,
@@ -242,6 +242,50 @@ where
             y: self.y * rhs,
             z: self.z * rhs,
             w: self.w * rhs,
+        }
+    }
+}
+
+/// Dot
+
+impl<T> Vector2<T>
+where
+    T: ops::Mul<Output = T> + ops::Add<Output = T>,
+{
+    fn dot(self, rhs: Self) -> T {
+        self.x * rhs.x + self.y * rhs.y
+    }
+}
+
+impl<T> Vector3<T>
+where
+    T: ops::Mul<Output = T> + ops::Add<Output = T>,
+{
+    fn dot(self, rhs: Self) -> T {
+        self.x * rhs.x + self.y * rhs.y + self.z * rhs.z
+    }
+}
+
+impl<T> Vector4<T>
+where
+    T: ops::Mul<Output = T> + ops::Add<Output = T>,
+{
+    fn dot(self, rhs: Self) -> T {
+        self.x * rhs.x + self.y * rhs.y + self.z * rhs.z + self.w * rhs.w
+    }
+}
+
+/// Cross
+
+impl<T> Vector3<T>
+where
+    T: Copy + ops::Mul<Output = T> + ops::Sub<Output = T>,
+{
+    fn cross(self, rhs: Self) -> Self {
+        Vector3 {
+            x: self.y * rhs.z - self.z * rhs.y,
+            y: self.z * rhs.x - self.x * rhs.z,
+            z: self.x * rhs.y - self.y * rhs.x,
         }
     }
 }
