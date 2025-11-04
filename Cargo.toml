@@ -2,5 +2,8 @@
 name = "mathvec"
 version = "0.1.0"
 edition = "2024"
+authors = ["Roman Polishchuk"]
+description = "Simple Math Vector library that support Vector2, Vector3 and Vector4."
+license = "MPL-2.0"
 
 [dependencies]
