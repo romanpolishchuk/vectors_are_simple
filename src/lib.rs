@@ -201,6 +201,51 @@ where
     }
 }
 
+/// Mul
+/// Vector * number
+
+impl<T> ops::Mul<T> for Vector2<T>
+where
+    T: Copy + ops::Mul<Output = T>,
+{
+    type Output = Self;
+    fn mul(self, rhs: T) -> Self::Output {
+        Self {
+            x: self.x * rhs,
+            y: self.y * rhs,
+        }
+    }
+}
+
+impl<T> ops::Mul<T> for Vector3<T>
+where
+    T: Copy + ops::Mul<Output = T>,
+{
+    type Output = Self;
+    fn mul(self, rhs: T) -> Self::Output {
+        Self {
+            x: self.x * rhs,
+            y: self.y * rhs,
+            z: self.z * rhs,
+        }
+    }
+}
+
+impl<T> ops::Mul<T> for Vector4<T>
+where
+    T: Copy + ops::Mul<Output = T>,
+{
+    type Output = Self;
+    fn mul(self, rhs: T) -> Self::Output {
+        Self {
+            x: self.x * rhs,
+            y: self.y * rhs,
+            z: self.z * rhs,
+            w: self.w * rhs,
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
