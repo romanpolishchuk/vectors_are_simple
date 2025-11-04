@@ -669,32 +669,76 @@ where
     }
 }
 
+/// Neg
+
+impl<T> ops::Neg for Vector2<T>
+where
+    T: ops::Neg<Output = T>,
+{
+    type Output = Self;
+    fn neg(self) -> Self::Output {
+        Self {
+            x: -self.x,
+            y: -self.y,
+        }
+    }
+}
+
+impl<T> ops::Neg for Vector3<T>
+where
+    T: ops::Neg<Output = T>,
+{
+    type Output = Self;
+    fn neg(self) -> Self::Output {
+        Self {
+            x: -self.x,
+            y: -self.y,
+            z: -self.z,
+        }
+    }
+}
+
+impl<T> ops::Neg for Vector4<T>
+where
+    T: ops::Neg<Output = T>,
+{
+    type Output = Self;
+    fn neg(self) -> Self::Output {
+        Self {
+            x: -self.x,
+            y: -self.y,
+            z: -self.z,
+            w: -self.w,
+        }
+    }
+}
+
 /// Dot
 
 impl<T> Vector2<T>
 where
-    T: ops::Mul<Output = T> + ops::Add<Output = T>,
+    T: Copy + ops::Mul<Output = T> + ops::Add<Output = T>,
 {
-    fn dot(self, rhs: Self) -> T {
-        self.x * rhs.x + self.y * rhs.y
+    fn dot(&self, other: &Self) -> T {
+        self.x * other.x + self.y * other.y
     }
 }
 
 impl<T> Vector3<T>
 where
-    T: ops::Mul<Output = T> + ops::Add<Output = T>,
+    T: Copy + ops::Mul<Output = T> + ops::Add<Output = T>,
 {
-    fn dot(self, rhs: Self) -> T {
-        self.x * rhs.x + self.y * rhs.y + self.z * rhs.z
+    fn dot(&self, other: &Self) -> T {
+        self.x * other.x + self.y * other.y + self.z * other.z
     }
 }
 
 impl<T> Vector4<T>
 where
-    T: ops::Mul<Output = T> + ops::Add<Output = T>,
+    T: Copy + ops::Mul<Output = T> + ops::Add<Output = T>,
 {
-    fn dot(self, rhs: Self) -> T {
-        self.x * rhs.x + self.y * rhs.y + self.z * rhs.z + self.w * rhs.w
+    fn dot(&self, other: &Self) -> T {
+        self.x * other.x + self.y * other.y + self.z * other.z + self.w * other.w
     }
 }
 
@@ -704,12 +748,117 @@ impl<T> Vector3<T>
 where
     T: Copy + ops::Mul<Output = T> + ops::Sub<Output = T>,
 {
-    fn cross(self, other: Self) -> Self {
+    fn cross(&self, other: &Self) -> Self {
         Vector3 {
             x: self.y * other.z - self.z * other.y,
             y: self.z * other.x - self.x * other.z,
             z: self.x * other.y - self.y * other.x,
         }
+    }
+}
+
+/// Magnitude
+
+impl<T> Vector2<T>
+where
+    T: Copy + ops::Mul<Output = T> + ops::Add<Output = T> + Into<f64>,
+{
+    fn magnitude(&self) -> f64 {
+        f64::sqrt((self.x * self.x + self.y * self.y).into())
+    }
+}
+
+impl<T> Vector3<T>
+where
+    T: Copy + ops::Mul<Output = T> + ops::Add<Output = T> + Into<f64>,
+{
+    fn magnitude(&self) -> f64 {
+        f64::sqrt((self.x * self.x + self.y * self.y + self.z * self.z).into())
+    }
+}
+
+impl<T> Vector4<T>
+where
+    T: Copy + ops::Mul<Output = T> + ops::Add<Output = T> + Into<f64>,
+{
+    fn magnitude(&self) -> f64 {
+        f64::sqrt((self.x * self.x + self.y * self.y + self.z * self.z + self.w * self.w).into())
+    }
+}
+
+/// Distance
+
+impl<T> Vector2<T>
+where
+    T: Copy + ops::Mul<Output = T> + ops::Add<Output = T> + ops::Sub<Output = T> + Into<f64>,
+{
+    fn distance(&self, other: &Self) -> f64 {
+        let dx = (self.x - other.x) * (self.x - other.x);
+        let dy = (self.y - other.y) * (self.y - other.y);
+        f64::sqrt((dx + dy).into())
+    }
+}
+
+impl<T> Vector3<T>
+where
+    T: Copy + ops::Mul<Output = T> + ops::Add<Output = T> + ops::Sub<Output = T> + Into<f64>,
+{
+    fn distance(&self, other: &Self) -> f64 {
+        let dx = (self.x - other.x) * (self.x - other.x);
+        let dy = (self.y - other.y) * (self.y - other.y);
+        let dz = (self.z - other.z) * (self.z - other.z);
+        f64::sqrt((dx + dy + dz).into())
+    }
+}
+
+impl<T> Vector4<T>
+where
+    T: Copy + ops::Mul<Output = T> + ops::Add<Output = T> + ops::Sub<Output = T> + Into<f64>,
+{
+    fn distance(&self, other: &Self) -> f64 {
+        let dx = (self.x - other.x) * (self.x - other.x);
+        let dy = (self.y - other.y) * (self.y - other.y);
+        let dz = (self.z - other.z) * (self.z - other.z);
+        let dw = (self.w - other.w) * (self.w - other.w);
+        f64::sqrt((dx + dy + dz + dw).into())
+    }
+}
+
+/// Distance Squared
+
+impl<T> Vector2<T>
+where
+    T: Copy + ops::Mul<Output = T> + ops::Add<Output = T> + ops::Sub<Output = T>,
+{
+    fn distance_squared(&self, other: &Self) -> T {
+        let dx = (self.x - other.x) * (self.x - other.x);
+        let dy = (self.y - other.y) * (self.y - other.y);
+        dx + dy
+    }
+}
+
+impl<T> Vector3<T>
+where
+    T: Copy + ops::Mul<Output = T> + ops::Add<Output = T> + ops::Sub<Output = T>,
+{
+    fn distance_squared(&self, other: &Self) -> T {
+        let dx = (self.x - other.x) * (self.x - other.x);
+        let dy = (self.y - other.y) * (self.y - other.y);
+        let dz = (self.z - other.z) * (self.z - other.z);
+        dx + dy + dz
+    }
+}
+
+impl<T> Vector4<T>
+where
+    T: Copy + ops::Mul<Output = T> + ops::Add<Output = T> + ops::Sub<Output = T>,
+{
+    fn distance_squared(&self, other: &Self) -> T {
+        let dx = (self.x - other.x) * (self.x - other.x);
+        let dy = (self.y - other.y) * (self.y - other.y);
+        let dz = (self.z - other.z) * (self.z - other.z);
+        let dw = (self.w - other.w) * (self.w - other.w);
+        dx + dy + dz + dw
     }
 }
 
