@@ -29,10 +29,10 @@ where
     T: ops::Add<Output = T>,
 {
     type Output = Self;
-    fn add(self, rhs: Self) -> Self::Output {
+    fn add(self, other: Self) -> Self::Output {
         Self {
-            x: self.x + rhs.x,
-            y: self.y + rhs.y,
+            x: self.x + other.x,
+            y: self.y + other.y,
         }
     }
 }
@@ -42,11 +42,11 @@ where
     T: ops::Add<Output = T>,
 {
     type Output = Self;
-    fn add(self, rhs: Self) -> Self::Output {
+    fn add(self, other: Self) -> Self::Output {
         Self {
-            x: self.x + rhs.x,
-            y: self.y + rhs.y,
-            z: self.z + rhs.z,
+            x: self.x + other.x,
+            y: self.y + other.y,
+            z: self.z + other.z,
         }
     }
 }
@@ -56,12 +56,12 @@ where
     T: ops::Add<Output = T>,
 {
     type Output = Self;
-    fn add(self, rhs: Self) -> Self::Output {
+    fn add(self, other: Self) -> Self::Output {
         Self {
-            x: self.x + rhs.x,
-            y: self.y + rhs.y,
-            z: self.z + rhs.z,
-            w: self.w + rhs.w,
+            x: self.x + other.x,
+            y: self.y + other.y,
+            z: self.z + other.z,
+            w: self.w + other.w,
         }
     }
 }
@@ -74,10 +74,10 @@ where
     T: Copy + ops::Add<Output = T>,
 {
     type Output = Self;
-    fn add(self, rhs: T) -> Self::Output {
+    fn add(self, other: T) -> Self::Output {
         Self {
-            x: self.x + rhs,
-            y: self.y + rhs,
+            x: self.x + other,
+            y: self.y + other,
         }
     }
 }
@@ -87,11 +87,11 @@ where
     T: Copy + ops::Add<Output = T>,
 {
     type Output = Self;
-    fn add(self, rhs: T) -> Self::Output {
+    fn add(self, other: T) -> Self::Output {
         Self {
-            x: self.x + rhs,
-            y: self.y + rhs,
-            z: self.z + rhs,
+            x: self.x + other,
+            y: self.y + other,
+            z: self.z + other,
         }
     }
 }
@@ -101,13 +101,85 @@ where
     T: Copy + ops::Add<Output = T>,
 {
     type Output = Self;
-    fn add(self, rhs: T) -> Self::Output {
+    fn add(self, other: T) -> Self::Output {
         Self {
-            x: self.x + rhs,
-            y: self.y + rhs,
-            z: self.z + rhs,
-            w: self.w + rhs,
+            x: self.x + other,
+            y: self.y + other,
+            z: self.z + other,
+            w: self.w + other,
         }
+    }
+}
+
+/// AddAssign
+/// Vector + Vector
+
+impl<T> ops::AddAssign for Vector2<T>
+where
+    T: ops::AddAssign,
+{
+    fn add_assign(&mut self, other: Self) {
+        self.x += other.x;
+        self.y += other.y;
+    }
+}
+
+impl<T> ops::AddAssign for Vector3<T>
+where
+    T: ops::AddAssign,
+{
+    fn add_assign(&mut self, other: Self) {
+        self.x += other.x;
+        self.y += other.y;
+        self.z += other.z;
+    }
+}
+
+impl<T> ops::AddAssign for Vector4<T>
+where
+    T: ops::AddAssign,
+{
+    fn add_assign(&mut self, other: Self) {
+        self.x += other.x;
+        self.y += other.y;
+        self.z += other.z;
+        self.w += other.w;
+    }
+}
+
+/// AddAssign
+/// Vector + number
+
+impl<T> ops::AddAssign<T> for Vector2<T>
+where
+    T: Copy + ops::AddAssign,
+{
+    fn add_assign(&mut self, other: T) {
+        self.x += other;
+        self.y += other;
+    }
+}
+
+impl<T> ops::AddAssign<T> for Vector3<T>
+where
+    T: Copy + ops::AddAssign,
+{
+    fn add_assign(&mut self, other: T) {
+        self.x += other;
+        self.y += other;
+        self.z += other;
+    }
+}
+
+impl<T> ops::AddAssign<T> for Vector4<T>
+where
+    T: Copy + ops::AddAssign,
+{
+    fn add_assign(&mut self, other: T) {
+        self.x += other;
+        self.y += other;
+        self.z += other;
+        self.w += other;
     }
 }
 
@@ -119,10 +191,10 @@ where
     T: ops::Sub<Output = T>,
 {
     type Output = Self;
-    fn sub(self, rhs: Self) -> Self::Output {
+    fn sub(self, other: Self) -> Self::Output {
         Self {
-            x: self.x - rhs.x,
-            y: self.y - rhs.y,
+            x: self.x - other.x,
+            y: self.y - other.y,
         }
     }
 }
@@ -132,11 +204,11 @@ where
     T: ops::Sub<Output = T>,
 {
     type Output = Self;
-    fn sub(self, rhs: Self) -> Self::Output {
+    fn sub(self, other: Self) -> Self::Output {
         Self {
-            x: self.x - rhs.x,
-            y: self.y - rhs.y,
-            z: self.z - rhs.z,
+            x: self.x - other.x,
+            y: self.y - other.y,
+            z: self.z - other.z,
         }
     }
 }
@@ -146,12 +218,12 @@ where
     T: ops::Sub<Output = T>,
 {
     type Output = Self;
-    fn sub(self, rhs: Self) -> Self::Output {
+    fn sub(self, other: Self) -> Self::Output {
         Self {
-            x: self.x - rhs.x,
-            y: self.y - rhs.y,
-            z: self.z - rhs.z,
-            w: self.w - rhs.w,
+            x: self.x - other.x,
+            y: self.y - other.y,
+            z: self.z - other.z,
+            w: self.w - other.w,
         }
     }
 }
@@ -164,10 +236,10 @@ where
     T: Copy + ops::Sub<Output = T>,
 {
     type Output = Self;
-    fn sub(self, rhs: T) -> Self::Output {
+    fn sub(self, other: T) -> Self::Output {
         Self {
-            x: self.x - rhs,
-            y: self.y - rhs,
+            x: self.x - other,
+            y: self.y - other,
         }
     }
 }
@@ -177,11 +249,11 @@ where
     T: Copy + ops::Sub<Output = T>,
 {
     type Output = Self;
-    fn sub(self, rhs: T) -> Self::Output {
+    fn sub(self, other: T) -> Self::Output {
         Self {
-            x: self.x - rhs,
-            y: self.y - rhs,
-            z: self.z - rhs,
+            x: self.x - other,
+            y: self.y - other,
+            z: self.z - other,
         }
     }
 }
@@ -191,12 +263,129 @@ where
     T: Copy + ops::Sub<Output = T>,
 {
     type Output = Self;
-    fn sub(self, rhs: T) -> Self::Output {
+    fn sub(self, other: T) -> Self::Output {
         Self {
-            x: self.x - rhs,
-            y: self.y - rhs,
-            z: self.z - rhs,
-            w: self.w - rhs,
+            x: self.x - other,
+            y: self.y - other,
+            z: self.z - other,
+            w: self.w - other,
+        }
+    }
+}
+
+/// SubAssign
+/// Vector + Vector
+
+impl<T> ops::SubAssign for Vector2<T>
+where
+    T: ops::SubAssign,
+{
+    fn sub_assign(&mut self, other: Self) {
+        self.x -= other.x;
+        self.y -= other.y;
+    }
+}
+
+impl<T> ops::SubAssign for Vector3<T>
+where
+    T: ops::SubAssign,
+{
+    fn sub_assign(&mut self, other: Self) {
+        self.x -= other.x;
+        self.y -= other.y;
+        self.z -= other.z;
+    }
+}
+
+impl<T> ops::SubAssign for Vector4<T>
+where
+    T: ops::SubAssign,
+{
+    fn sub_assign(&mut self, other: Self) {
+        self.x -= other.x;
+        self.y -= other.y;
+        self.z -= other.z;
+        self.w -= other.w;
+    }
+}
+
+/// SubAssign
+/// Vector + number
+
+impl<T> ops::SubAssign<T> for Vector2<T>
+where
+    T: Copy + ops::SubAssign,
+{
+    fn sub_assign(&mut self, other: T) {
+        self.x -= other;
+        self.y -= other;
+    }
+}
+
+impl<T> ops::SubAssign<T> for Vector3<T>
+where
+    T: Copy + ops::SubAssign,
+{
+    fn sub_assign(&mut self, other: T) {
+        self.x -= other;
+        self.y -= other;
+        self.z -= other;
+    }
+}
+
+impl<T> ops::SubAssign<T> for Vector4<T>
+where
+    T: Copy + ops::SubAssign,
+{
+    fn sub_assign(&mut self, other: T) {
+        self.x -= other;
+        self.y -= other;
+        self.z -= other;
+        self.w -= other;
+    }
+}
+
+/// Mul (Scalar Multiplication)
+/// Vector * Vector
+
+impl<T> ops::Mul for Vector2<T>
+where
+    T: ops::Mul<Output = T>,
+{
+    type Output = Self;
+    fn mul(self, other: Self) -> Self::Output {
+        Self {
+            x: self.x * other.x,
+            y: self.y * other.y,
+        }
+    }
+}
+
+impl<T> ops::Mul for Vector3<T>
+where
+    T: ops::Mul<Output = T>,
+{
+    type Output = Self;
+    fn mul(self, other: Self) -> Self::Output {
+        Self {
+            x: self.x * other.x,
+            y: self.y * other.y,
+            z: self.z * other.z,
+        }
+    }
+}
+
+impl<T> ops::Mul for Vector4<T>
+where
+    T: ops::Mul<Output = T>,
+{
+    type Output = Self;
+    fn mul(self, other: Self) -> Self::Output {
+        Self {
+            x: self.x * other.x,
+            y: self.y * other.y,
+            z: self.z * other.z,
+            w: self.w * other.w,
         }
     }
 }
@@ -209,10 +398,10 @@ where
     T: Copy + ops::Mul<Output = T>,
 {
     type Output = Self;
-    fn mul(self, rhs: T) -> Self::Output {
+    fn mul(self, other: T) -> Self::Output {
         Self {
-            x: self.x * rhs,
-            y: self.y * rhs,
+            x: self.x * other,
+            y: self.y * other,
         }
     }
 }
@@ -222,11 +411,11 @@ where
     T: Copy + ops::Mul<Output = T>,
 {
     type Output = Self;
-    fn mul(self, rhs: T) -> Self::Output {
+    fn mul(self, other: T) -> Self::Output {
         Self {
-            x: self.x * rhs,
-            y: self.y * rhs,
-            z: self.z * rhs,
+            x: self.x * other,
+            y: self.y * other,
+            z: self.z * other,
         }
     }
 }
@@ -236,13 +425,247 @@ where
     T: Copy + ops::Mul<Output = T>,
 {
     type Output = Self;
-    fn mul(self, rhs: T) -> Self::Output {
+    fn mul(self, other: T) -> Self::Output {
         Self {
-            x: self.x * rhs,
-            y: self.y * rhs,
-            z: self.z * rhs,
-            w: self.w * rhs,
+            x: self.x * other,
+            y: self.y * other,
+            z: self.z * other,
+            w: self.w * other,
         }
+    }
+}
+
+/// MulAssign (Scalar Multiplication)
+/// Vector * Vector
+
+impl<T> ops::MulAssign for Vector2<T>
+where
+    T: ops::MulAssign,
+{
+    fn mul_assign(&mut self, other: Self) {
+        self.x *= other.x;
+        self.y *= other.y;
+    }
+}
+
+impl<T> ops::MulAssign for Vector3<T>
+where
+    T: ops::MulAssign,
+{
+    fn mul_assign(&mut self, other: Self) {
+        self.x *= other.x;
+        self.y *= other.y;
+        self.z *= other.z;
+    }
+}
+
+impl<T> ops::MulAssign for Vector4<T>
+where
+    T: ops::MulAssign,
+{
+    fn mul_assign(&mut self, other: Self) {
+        self.x *= other.x;
+        self.y *= other.y;
+        self.z *= other.z;
+        self.w *= other.w;
+    }
+}
+
+/// MulAssign
+/// Vector * number
+
+impl<T> ops::MulAssign<T> for Vector2<T>
+where
+    T: Copy + ops::MulAssign,
+{
+    fn mul_assign(&mut self, other: T) {
+        self.x *= other;
+        self.y *= other;
+    }
+}
+
+impl<T> ops::MulAssign<T> for Vector3<T>
+where
+    T: Copy + ops::MulAssign,
+{
+    fn mul_assign(&mut self, other: T) {
+        self.x *= other;
+        self.y *= other;
+        self.z *= other;
+    }
+}
+
+impl<T> ops::MulAssign<T> for Vector4<T>
+where
+    T: Copy + ops::MulAssign,
+{
+    fn mul_assign(&mut self, other: T) {
+        self.x *= other;
+        self.y *= other;
+        self.z *= other;
+        self.w *= other;
+    }
+}
+
+/// Div (Scalar Division)
+/// Vector / Vector
+
+impl<T> ops::Div for Vector2<T>
+where
+    T: ops::Div<Output = T>,
+{
+    type Output = Self;
+    fn div(self, other: Self) -> Self::Output {
+        Self {
+            x: self.x / other.x,
+            y: self.y / other.y,
+        }
+    }
+}
+
+impl<T> ops::Div for Vector3<T>
+where
+    T: ops::Div<Output = T>,
+{
+    type Output = Self;
+    fn div(self, other: Self) -> Self::Output {
+        Self {
+            x: self.x / other.x,
+            y: self.y / other.y,
+            z: self.z / other.z,
+        }
+    }
+}
+
+impl<T> ops::Div for Vector4<T>
+where
+    T: ops::Div<Output = T>,
+{
+    type Output = Self;
+    fn div(self, other: Self) -> Self::Output {
+        Self {
+            x: self.x / other.x,
+            y: self.y / other.y,
+            z: self.z / other.z,
+            w: self.w / other.w,
+        }
+    }
+}
+
+/// Div
+/// Vector / number
+
+impl<T> ops::Div<T> for Vector2<T>
+where
+    T: Copy + ops::Div<Output = T>,
+{
+    type Output = Self;
+    fn div(self, other: T) -> Self::Output {
+        Self {
+            x: self.x / other,
+            y: self.y / other,
+        }
+    }
+}
+
+impl<T> ops::Div<T> for Vector3<T>
+where
+    T: Copy + ops::Div<Output = T>,
+{
+    type Output = Self;
+    fn div(self, other: T) -> Self::Output {
+        Self {
+            x: self.x / other,
+            y: self.y / other,
+            z: self.z / other,
+        }
+    }
+}
+
+impl<T> ops::Div<T> for Vector4<T>
+where
+    T: Copy + ops::Div<Output = T>,
+{
+    type Output = Self;
+    fn div(self, other: T) -> Self::Output {
+        Self {
+            x: self.x / other,
+            y: self.y / other,
+            z: self.z / other,
+            w: self.w / other,
+        }
+    }
+}
+
+/// DivAssign (Scalar Division)
+/// Vector * Vector
+
+impl<T> ops::DivAssign for Vector2<T>
+where
+    T: ops::DivAssign,
+{
+    fn div_assign(&mut self, other: Self) {
+        self.x /= other.x;
+        self.y /= other.y;
+    }
+}
+
+impl<T> ops::DivAssign for Vector3<T>
+where
+    T: ops::DivAssign,
+{
+    fn div_assign(&mut self, other: Self) {
+        self.x /= other.x;
+        self.y /= other.y;
+        self.z /= other.z;
+    }
+}
+
+impl<T> ops::DivAssign for Vector4<T>
+where
+    T: ops::DivAssign,
+{
+    fn div_assign(&mut self, other: Self) {
+        self.x /= other.x;
+        self.y /= other.y;
+        self.z /= other.z;
+        self.w /= other.w;
+    }
+}
+
+/// DivAssign
+/// Vector * number
+
+impl<T> ops::DivAssign<T> for Vector2<T>
+where
+    T: Copy + ops::DivAssign,
+{
+    fn div_assign(&mut self, other: T) {
+        self.x /= other;
+        self.y /= other;
+    }
+}
+
+impl<T> ops::DivAssign<T> for Vector3<T>
+where
+    T: Copy + ops::DivAssign,
+{
+    fn div_assign(&mut self, other: T) {
+        self.x /= other;
+        self.y /= other;
+        self.z /= other;
+    }
+}
+
+impl<T> ops::DivAssign<T> for Vector4<T>
+where
+    T: Copy + ops::DivAssign,
+{
+    fn div_assign(&mut self, other: T) {
+        self.x /= other;
+        self.y /= other;
+        self.z /= other;
+        self.w /= other;
     }
 }
 
@@ -281,11 +704,11 @@ impl<T> Vector3<T>
 where
     T: Copy + ops::Mul<Output = T> + ops::Sub<Output = T>,
 {
-    fn cross(self, rhs: Self) -> Self {
+    fn cross(self, other: Self) -> Self {
         Vector3 {
-            x: self.y * rhs.z - self.z * rhs.y,
-            y: self.z * rhs.x - self.x * rhs.z,
-            z: self.x * rhs.y - self.y * rhs.x,
+            x: self.y * other.z - self.z * other.y,
+            y: self.z * other.x - self.x * other.z,
+            z: self.x * other.y - self.y * other.x,
         }
     }
 }
